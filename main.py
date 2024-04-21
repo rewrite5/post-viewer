@@ -1,4 +1,4 @@
-from get_posts import get_posts
+from src.get_posts import get_posts
 from pydantic import BaseModel
 from fastapi import FastAPI, Query
 import uvicorn
