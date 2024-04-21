@@ -2,6 +2,7 @@ from get_posts import get_posts
 from pydantic import BaseModel
 from fastapi import FastAPI, Query
 import uvicorn
+import asyncio
 
 app = FastAPI()
 
@@ -23,9 +24,9 @@ async def get_index():
 
 @app.get("/api/posts/")
 async def get_user_posts(
-    username: str = Query(..., description="Username of the user")
-):
+    username: str = Query(..., description="Username of the user")):
     data_total = get_posts(username)
+    await asyncio.sleep(30)
     return data_total
 
 
