@@ -25,8 +25,8 @@ async def get_index():
 @app.get("/api/user/")
 async def validate_user(username: str = Query(..., description="Username of the user")):
     try:
-        user = get_posts(username)
-        return user
+        user = get_data_from_username(username)
+        return [user]
     except Exception as e:
         return {"error": str(e)}
 
