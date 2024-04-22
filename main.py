@@ -1,6 +1,6 @@
 from src.get_posts import get_posts
 from pydantic import BaseModel
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, HTTPException
 # import uvicorn
 
 app = FastAPI()
@@ -21,28 +21,17 @@ async def get_index():
     return msg
 
 
-# @app.get("/api/posts/")
-# async def get_user_posts(
-#     username: str = Query(..., description="Username of the user")
-# ):
-#     try:
-#         data_total = get_posts(username)
-#         if isinstance(data_total, str):
-#             return {"error": "User not found"}
-#         return data_total
-#     except Exception as e:
-#         return {"error": str(e)}
-
-
-@app.get("/api/posts/{username}")
+@app.get("/api/posts/")
 async def get_user_posts(username: str):
+    print(type(username))
     try:
         data_total = get_posts(username)
-        if isinstance(data_total, str):
-            return {"error": "Usuario no encontrado"}
+        print(type(data_total))
+        if not isinstance(data_total, list):
+            raise HTTPException(status_code=404, detail="User not found")
         return data_total
     except Exception as e:
-        return {"error": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.get("/api/stories/")
