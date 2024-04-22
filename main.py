@@ -21,14 +21,25 @@ async def get_index():
     return msg
 
 
-@app.get("/api/posts/")
-async def get_user_posts(
-    username: str = Query(..., description="Username of the user")
-):
+# @app.get("/api/posts/")
+# async def get_user_posts(
+#     username: str = Query(..., description="Username of the user")
+# ):
+#     try:
+#         data_total = get_posts(username)
+#         if isinstance(data_total, str):
+#             return {"error": "User not found"}
+#         return data_total
+#     except Exception as e:
+#         return {"error": str(e)}
+
+
+@app.get("/api/posts/{username}")
+async def get_user_posts(username: str):
     try:
         data_total = get_posts(username)
         if isinstance(data_total, str):
-            return {"error": "User not found"}
+            return {"error": "Usuario no encontrado"}
         return data_total
     except Exception as e:
         return {"error": str(e)}
