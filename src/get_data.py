@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 from requests import get
 from json import loads
 
+
 def get_data_from_username(username: str) -> str:
     try:
         url = f"https://imginn.com/{username}"
@@ -26,5 +27,3 @@ def get_data_from_username(username: str) -> str:
             return "Error en la solicitud"
     except Exception as e:
         return str(e)
-
-# iimsaarah
