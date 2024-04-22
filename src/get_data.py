@@ -22,8 +22,8 @@ def get_data_from_username(username: str) -> str:
             data = loads(script_tag)
             return data
         elif response.status_code == 404:
-            return "Usuario no encontrado"
+            return "User not found"
         else:
-            return "Error en la solicitud"
+            return "Error in the request"
     except Exception as e:
         return str(e)

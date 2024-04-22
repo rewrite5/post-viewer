@@ -1,7 +1,7 @@
 from src.get_posts import get_posts
 from pydantic import BaseModel
 from fastapi import FastAPI, Query
-import uvicorn
+# import uvicorn
 
 app = FastAPI()
 
@@ -25,13 +25,18 @@ async def get_index():
 async def get_user_posts(
     username: str = Query(..., description="Username of the user")
 ):
-    data_total = get_posts(username)
-    return data_total
+    try:
+        data_total = get_posts(username)
+        if isinstance(data_total, str):
+            return {"error": "User not found"}
+        return data_total
+    except Exception as e:
+        return {"error": str(e)}
 
 
 @app.get("/api/stories/")
 async def get_user_stories(
-    username: str = Query(..., description="Username of the user")
+    # username: str = Query(..., description="Username of the user")
 ):
     msg = Msg(msg="Under construction")
     return msg
@@ -48,6 +53,3 @@ async def get_about():
 
 if __name__ == "__main__":
     pass
-    # uvicorn.run(app, host="0.0.0.0", port=8000)
-
-# uvicorn main:app --reload
