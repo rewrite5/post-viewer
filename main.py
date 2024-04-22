@@ -28,8 +28,7 @@ async def get_user_posts(username: str):
         data_total = get_posts(username)
         print(type(data_total))
         if not isinstance(data_total, list):
-            raise HTTPException(status_code=404, detail="User not found")
-        return data_total
+            return data_total
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
