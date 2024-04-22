@@ -8,6 +8,7 @@ charset-normalizer==3.3.2
 click==8.1.7
 fastapi==0.110.2
 Flask==3.0.3
+gunicorn==22.0.0
 h11==0.14.0
 httptools==0.6.1
 idna==3.7
