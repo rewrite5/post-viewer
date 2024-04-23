@@ -60,3 +60,4 @@ def get_data_from_username(username: str) -> Union[str, dict]:
             return "Error in the request"
     except Exception as e:
         return str(e)
+
